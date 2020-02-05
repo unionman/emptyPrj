@@ -1,5 +1,6 @@
 package com.empty.prjname.rest.sample.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class RestSampleController {
 
+    @Value("${profile.level}") 
+    private String profileLevel;
+
     @RequestMapping(value = "/rest/sample_page", method = RequestMethod.GET)
     public String getSample_page(ModelMap model) {
         
@@ -32,6 +36,7 @@ public class RestSampleController {
         model.addAttribute( data);
         
         log.debug("data = {}", data);
+        log.debug("profileLevel = {}", profileLevel);
         
         return "jsonView";
     }
@@ -50,6 +55,7 @@ public class RestSampleController {
         model.addObject(data);
         
         log.debug("data = {}", data);
+        log.debug("profileLevel = {}", profileLevel);
         
         return model;
     }

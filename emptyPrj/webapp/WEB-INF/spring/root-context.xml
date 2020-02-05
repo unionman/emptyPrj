@@ -10,7 +10,6 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
-
     <context:component-scan base-package="com.empty.prjname">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
@@ -28,6 +27,53 @@
         <property name="suffix" value=".jsp" />
     </bean>
         
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:/config/config.properties</value>
+<!--                 <value>classpath:/config/config-#{systemProperties['spring.profiles.active'] == null || systemProperties['spring.profiles.active'] == '' ? 'local' : systemProperties['spring.profiles.active']}.properties</value> -->
+            </list>
+        </property>
+        <property name="fileEncoding" value="UTF-8" />
+    </bean>
 
+    <util:properties id="config" location="classpath:/config/config.properties"/>
+    <context:property-placeholder properties-ref="config" />
+
+
+    <bean id="dataSourceFirst" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="${jdbc.first.url}"/>
+        <property name="username" value="${jdbc.first.name}"/>
+        <property name="password" value="${jdbc.first.password}"/>
+        <property name="maxActive" value="10"/>
+        <property name="maxIdle" value="5"/>
+        <property name="maxWait" value="10000"/>
+        <property name="initialSize" value="5"/>
+        <property name="validationQuery" value="select 1 from dual"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="testWhileIdle" value="false"/>
+        <property name="timeBetweenEvictionRunsMillis" value="3000"/>
+        <property name="removeAbandoned" value="false"/>
+        <property name="removeAbandonedTimeout" value="60"/>
+        <property name="logAbandoned" value="true"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSourceFirst" />
+        <property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+        <property name="mapperLocations" value="/WEB-INF/sqlMap/**/*Mapper.xml"></property>
+    </bean>
+
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSourceFirst" />
+    </bean>
+ 
 
 </beans>

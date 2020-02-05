@@ -56,10 +56,22 @@
         <appender-ref ref="consoleAppender" />
     </logger>
 
+    <!-- log4jdbc-log4j2 -->
+    <logger name="jdbc.sqlonly"        level="DEBUG">
+        <appender-ref ref="consoleAppender" />
+    </logger>
+    <logger name="jdbc.sqltiming"      level="INFO">
+        <appender-ref ref="consoleAppender" />
+    </logger>
+    <logger name="jdbc.audit"          level="WARN"/>
+    <logger name="jdbc.resultset"      level="ERROR"/>
+    <logger name="jdbc.resultsettable" level="ERROR"/>
+    <logger name="jdbc.connection"     level="INFO"/>
 
     <!-- root는 글로벌 로거를 의미하며, 위의 logger에 해당하지 않으면 root 로거가 실행된다. -->
     <root level="debug">
         <appender-ref ref="consoleAppender" />
     </root>
+
 
 </configuration>
