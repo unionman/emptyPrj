@@ -24,4 +24,10 @@ public class SampleDaoImpl implements SampleDao {
         return sqlSession.selectList(Namespace+".selectSampleInfo");
     }
 
+    @Override
+    public int updateTestAge() throws Exception {
+        // TODO Auto-generated method stub
+        return sqlSession.update(Namespace+".updateTestAge");
+    }
+
 }

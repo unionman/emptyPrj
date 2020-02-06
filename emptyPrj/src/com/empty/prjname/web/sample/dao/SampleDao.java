@@ -8,5 +8,7 @@ public interface SampleDao {
 
     public List<SampleVo> selectSampleInfo() throws Exception;
 
+    public int updateTestAge() throws Exception;
+    
 
 }

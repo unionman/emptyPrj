@@ -11,5 +11,10 @@
             ,"name" as name
     </select>
     
+    <update id="updateTestAge">
+        update test set age = age + 1
+        where id = 623
+    </update>
+    
 </mapper>
 

@@ -1,5 +1,7 @@
 package com.empty.prjname.web.sample.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,8 +33,13 @@ public class SampleController {
         
 //        ModelAndView model = new ModelAndView();
         log.debug("loggggggggggggg");
-        log.debug("test == {}", sampleService.selectSampleInfo().size() );
+        
+        List datas = sampleService.selectSampleInfo();
+        log.debug("test == {}", datas.size() );
+        
+        
         model.addAttribute("currentTimeStamp", DateUtil.getCurrentTimeStamp() );
+        model.addAttribute("datas", datas );
 
         return "/sample_page";
     }

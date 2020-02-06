@@ -12,22 +12,29 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<pre>
-sample_page!!!
-sample_page!!!
-sample_page!!!
-sample_page!!!
-sample_page!!!
-sample_page!!!
-${currentTimeStamp }
-
-<br>
-
-<spring:eval var="profileLevel" expression="@config.getProperty('profile.level')"></spring:eval>
-${profileLevel }
-</pre>
-
+    
+    <pre>
+    sample_page!!!
+    sample_page!!!
+    sample_page!!!
+    sample_page!!!
+    sample_page!!!
+    sample_page!!!
+    ${currentTimeStamp }
+    
+    <br>
+    
+    <spring:eval var="profileLevel" expression="@config.getProperty('profile.level')"></spring:eval>
+    ${profileLevel }
+    
+    </pre>
+    <br><br>
+    
+    ${datas }
+    <br>
+    ${datas[0] }
+    <br>
+    ${datas[0].age }
 
 
 </body>
