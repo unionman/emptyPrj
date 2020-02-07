@@ -26,14 +26,14 @@ public class SampleServiceImpl implements SampleService {
         int resultInt = 0;
         
         resultInt += sampleDao.updateTestAge();
-        resultInt += sampleDao.updateTestAge();
         
         log.debug("resultInt = {}", resultInt);
         log.debug("resultInt = {}", resultInt);
         log.debug("resultInt = {}", resultInt);
         
+        List<SampleVo> datas = sampleDao.selectSampleInfo();
         
-        return sampleDao.selectSampleInfo();
+        return datas;
     }
 
     

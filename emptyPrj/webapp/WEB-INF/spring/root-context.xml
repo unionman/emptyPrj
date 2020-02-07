@@ -75,5 +75,12 @@
         <property name="dataSource" ref="dataSourceFirst" />
     </bean>
  
+     <!-- 여러 개의 Mapper 인터페이스 설정  -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.empty.prjname" />
+        <property name="annotationClass" value="org.apache.ibatis.annotations.Mapper" />
+    </bean> 
+ 
+ 
 
 </beans>

@@ -3,12 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="mapper.SampleDao">
+<mapper namespace="com.empty.prjname.web.sample.dao.SampleDao">
  
     <select id="selectSampleInfo" resultType="com.empty.prjname.web.sample.vo.SampleVo">
         select 
-            11 as age
-            ,"name" as name
+            id, name, age 
+        from test
+        order by id DESC 
+        limit 50
     </select>
     
     <update id="updateTestAge">

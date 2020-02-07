@@ -35,7 +35,39 @@
     ${datas[0] }
     <br>
     ${datas[0].age }
+    
+    <br>
+    
+<%-- for문 --%>
+<table border="1" width="600px">
+<c:forEach var="ii" begin="0" end="${fn:length(datas)-1}">
+    <tr>
+        <td>${ii}</td>
+        <td>${datas[ii]}</td>
+    </tr>
+</c:forEach>
+</table>
 
+<br>
+
+<table border="1" width="600px">
+<c:forEach var="dataItem" items="${datas}" varStatus="status">
+
+    <tr>
+        <td>${status.index}</td>
+        <td>${dataItem}</td>
+    </tr>
+</c:forEach>
+</table>
+
+    
+<%
+for(int ii = 0 ; ii<11; ii++ ){
+%>
+    console.log(ii);
+<%
+}
+%>
 
 </body>
 </html>
