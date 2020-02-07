@@ -81,6 +81,8 @@
         <property name="annotationClass" value="org.apache.ibatis.annotations.Mapper" />
     </bean> 
  
+    <bean id="swagger2Config"
+          class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration"/>
  
 
 </beans>
