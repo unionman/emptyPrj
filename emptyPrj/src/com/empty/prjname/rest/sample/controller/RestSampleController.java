@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.empty.prjname.comm.DateUtil;
+import com.empty.prjname.comm.exception.CustomInterfaceException;
 import com.empty.prjname.comm.model.DefaultJsonModelView;
 import com.empty.prjname.web.sample.service.SampleService;
 import com.empty.prjname.web.sample.vo.SampleVo;
@@ -126,6 +128,25 @@ public class RestSampleController {
         log.debug("profileLevel = {}", profileLevel);
         
         return model;
+    }
+    
+    @RequestMapping(value = "/rest/sample_page5", method = RequestMethod.GET)
+    public SampleVo getSample_page5() throws Exception {
+        try {
+            int ii =  1/0;
+        } catch (Exception e) {
+            // TODO: handle exception
+            throw new CustomInterfaceException(HttpStatus.BAD_REQUEST.toString(), new String[] {"테스트 입니다. 하하하"}, "");
+        }
+        
+        
+        SampleVo data  = new SampleVo();
+        data.setName("홍길순");
+        data.setAge(27);
+        data.setContry("EN");
+        data.setDateTime( DateUtil.getCurrentTimeStamp() );
+        
+        return data;
     }
     
     

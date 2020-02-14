@@ -140,4 +140,21 @@ public class RestContorllerExceptionAdvice {
         return model;
     }
 
+    @ExceptionHandler( CustomInterfaceException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public CommonHeader CustomInterfaceException(HttpServletResponse response, CustomInterfaceException e) {
+        CommonHeader commonHeader = new CommonHeader();
+        commonHeader.setDescription(e.toString());
+        
+        log.info("Error Message ::::: {}", e.args);
+        
+        commonHeader.setCode( Integer.toString(HttpStatus.BAD_REQUEST.value()) );
+        commonHeader.setMessage(String.join(",", (String[])e.args));
+        
+        return commonHeader;
+    }
+
+
+
 }
+
