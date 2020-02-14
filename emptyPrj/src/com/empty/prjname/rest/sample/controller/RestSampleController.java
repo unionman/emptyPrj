@@ -2,12 +2,14 @@ package com.empty.prjname.rest.sample.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.empty.prjname.comm.DateUtil;
@@ -15,6 +17,8 @@ import com.empty.prjname.comm.model.DefaultJsonModelView;
 import com.empty.prjname.web.sample.service.SampleService;
 import com.empty.prjname.web.sample.vo.SampleVo;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -23,7 +27,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 @Slf4j
-@Controller
+@Api(value = "/rest", description = "샘플 컨트롤러")
+@RestController
 public class RestSampleController {
 
     @Value("${profile.level}") 
@@ -33,6 +38,7 @@ public class RestSampleController {
     SampleService sampleService;
     
 
+    @ApiOperation(value="샘플 sample_page" ,notes="노트 영역입니다.")
     @RequestMapping(value = "/rest/sample_page", method = RequestMethod.GET)
     public String getSample_page(ModelMap model) throws Exception  {
         
@@ -52,7 +58,7 @@ public class RestSampleController {
     }
     
     @RequestMapping(value = "/rest/sample_page2", method = RequestMethod.GET)
-    public ModelAndView getSample_page2() {
+    public SampleVo getSample_page2() {
         
         ModelAndView model = new ModelAndView("jsonView");
 
@@ -67,7 +73,26 @@ public class RestSampleController {
         log.debug("data = {}", data);
         log.debug("profileLevel = {}", profileLevel);
         
-        return model;
+        return data;
+    }
+    
+    @RequestMapping(value = "/rest/sample_page22", method = RequestMethod.GET)
+    public SampleVo getSample_page22(@Valid SampleVo sampleVo) {
+        
+        ModelAndView model = new ModelAndView("jsonView");
+        
+        SampleVo data  = new SampleVo();
+        data.setName("홍길순");
+        data.setAge(27);
+        data.setContry("EN");
+        data.setDateTime( DateUtil.getCurrentTimeStamp() );
+        
+        model.addObject(data);
+        
+        log.debug("data = {}", data);
+        log.debug("profileLevel = {}", profileLevel);
+        
+        return data;
     }
     
     @RequestMapping(value = "/rest/sample_page3", method = RequestMethod.GET)
