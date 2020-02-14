@@ -132,12 +132,12 @@ public class RestSampleController {
     
     @RequestMapping(value = "/rest/sample_page5", method = RequestMethod.GET)
     public SampleVo getSample_page5() throws Exception {
-        try {
-            int ii =  1/0;
-        } catch (Exception e) {
-            // TODO: handle exception
-            throw new CustomInterfaceException(HttpStatus.BAD_REQUEST.toString(), new String[] {"테스트 입니다. 하하하"}, "");
-        }
+//        try {
+//            int ii =  1/0;
+//        } catch (Exception e) {
+//            // TODO: handle exception
+//            throw new CustomInterfaceException(HttpStatus.BAD_REQUEST.toString(), new String[] {"테스트 입니다. 하하하"}, "");
+//        }
         
         
         SampleVo data  = new SampleVo();
